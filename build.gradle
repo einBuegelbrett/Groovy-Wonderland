@@ -1,0 +1,36 @@
+plugins {
+    id 'groovy'
+    id 'maven-publish' // Add this
+}
+
+group = 'de.thm'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:5.0.0'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// All you need to send those boogie Vibes!
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group
+            artifactId = 'groovy-wonderland'
+            version = 'LOCAL'
+
+            from components.java
+        }
+    }
+}
+
